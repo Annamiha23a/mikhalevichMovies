@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление критика</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/footer.css">
+
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<main>
+    <div class="container">
+        <form th:action="@{/add-customer}"
+              th:object="${critics}" method="post">
+            <div class="py-5 text-center">
+                <br>
+                <h2>Добавление критика</h2>
+            </div>
+
+
+            <div class="col-md-7 col-lg-8">
+                <h4 class="mb-3">Личные данные</h4>
+                <form class="needs-validation" novalidate="">
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label for="specialty" class="form-label">Специальность</label></br>
+                            <input type="text" class="form-control" id="specialty" th:field="*{specialty}" required="">
+                            <div class="invalid-feedback">
+                                Введите специальность!
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="name" class="form-label">Имя</label></br>
+                            <input type="text" class="form-control" id="name" th:field="*{name}" required="">
+                            <div class="invalid-feedback">
+                                Введите Имя!
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="surname" class="form-label">Фамилия</label></br>
+                            <input type="text" class="form-control" id="surname" th:field="*{surname}">
+                            <div class="invalid-feedback">
+                                Введите Фамилию!
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="experience" class="form-label">Опыт</label></br>
+                            <input type="text" class="form-control" id="experience"  th:field="*{experience}"
+                                   required="">
+                            <div class="invalid-feedback">
+                                Введите Опыт!
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="university" class="form-label">Университет</label></br>
+                            <input type="text" class="form-control" id="university" th:field="*{university}"  required="">
+                            <div class="invalid-feedback">
+                                Введите университет!
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <hr class="my-4">
+
+                    <button class="w-100 btn btn-success btn-lg" type="submit">Добавить</button>
+                </form>
+            </div>
+        </form>
+    </div>
+    </div>
+</main>
+<footer th:insert="blocks/footer :: footer"></footer>
+</body>
+</html>

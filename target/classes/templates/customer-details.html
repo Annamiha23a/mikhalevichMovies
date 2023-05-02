@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaef.org">
+<head>
+    <title>Критик</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+
+
+<div class="album py-5 bg-light">
+    <div class="container mt-5">
+        <h1>Критик</h1>
+    </div>
+    <div class="container">
+        <div th:each="el : ${customer}" class="alert alert-info mt-2">
+            <h1 th:utext="${'<strong>Специальность:</strong> ' + el.getSpecialty()}"></h1>
+            <br>
+            <h1 th:utext="${'<strong>Имя:</strong> ' + el.getName()}"></h1>
+            <br>
+            <h1 th:utext="${'<strong>Фамилия:</strong> ' + el.getSurname()}"></h1>
+            <br>
+            <h1 th:utext="${'<strong>Опыт:</strong> ' + el.getExperience()}"></h1>
+            <br>
+            <h1 th:utext="${'<strong>Университет:</strong> ' + el.getUniversity()}"></h1>
+            <br>
+            <form th:action="'/customer/'+${el.getId()}+'/update'" method="get">
+                <button class="btn btn-sm btn-outline-success" type="submit">Редактировать</button>
+            </form>
+        </div>
+    </div>
+</div>
+<footer th:insert="blocks/footer :: footer"></footer>
+</body>
+</html>

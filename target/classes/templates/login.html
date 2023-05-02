@@ -1,0 +1,33 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/style.css" class="">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Авторизация</title>
+</head>
+<body>
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+
+        <div class="fadeIn first">
+            <img src="https://i.pinimg.com/564x/db/c1/dd/dbc1ddbee2423466fdca81c9d7ebda94.jpg" id="icon" alt="User Icon"/>
+        </div>
+
+        <form th:action="@{/perform_login}" method="post">
+            <input type="text" id="username" class="form-control" name="username" placeholder="login">
+            <input type="text" id="password" class="form-control" name="password" placeholder="password">
+            <div class="form-row" th:if="${param.error}">
+                <div class="col-sm-12">
+                    <p class="text-danger">Неверный логин или пароль!</p>
+                </div>
+            </div>
+            <input type="submit" class="fadeIn fourth" value="Log In">
+        </form>
+        <a href="/registration">Регистрация</a>
+    </div>
+</div>
+</body>
+</html>

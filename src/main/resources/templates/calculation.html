@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaef.org">
+<head>
+  <title>Расчёт</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<br/>
+<br/>
+
+<main>
+  <div class="album py-5 bg-light" >
+    <table class="iksweb">
+      <tbody>
+      <tr>
+        <td>Сюжет</td>
+        <td>Актёрская игра</td>
+        <td>Съёмка</td>
+        <td>Монтаж</td>
+        <td>Оригинальность</td>
+      </tr>
+      <tr>
+        <td><input type="number" min="1" class="form-control" id="storyline">
+          <div class="invalid-feedback">
+            Введите оценку!
+          </div></td>
+        <td><input type="number" min="1" class="form-control" id="acting">
+          <div class="invalid-feedback">
+            Введите оценку!
+          </div></td>
+        <td><input type="number" min="1" class="form-control" id="shot">
+          <div class="invalid-feedback">
+            Введите оценку!
+          </div></td>
+        <td><input type="number" min="1" class="form-control" id="montage">
+          <div class="invalid-feedback">
+            Введите оценку!
+          </div></td>
+        <td><input type="number" min="1" class="form-control" id="originality">
+          <div class="invalid-feedback">
+            Введите оценку!
+          </div></td>
+      </tr>
+      </tbody>
+    </table>
+
+    <button class="w-75 btn btn-success btn-lg" type="submit" id="method"  onclick="abs(storyline.value,acting.value,shot.value,montage.value,originality.value)">Рассчитать</button>
+
+    <table class="iksweb">
+      <tbody>
+      <tr>
+        <td>Сюжет</td>
+        <td > <label for="res1" class="form-label">Вес оценки</label>
+          <div class="input-group has-validation">
+            <span class="input-group-text"></span>
+            <input type="number" min="0" step="5" class="form-control" readonly id="res1"  placeholder="Price for one" required=""></div></td>
+
+      </tr>
+      <tr>
+        <td>Актёрская игра</td>
+        <td > <label for="res2" class="form-label">Вес оценки</label>
+          <div class="input-group has-validation">
+            <span class="input-group-text"></span>
+            <input type="number" min="0" step="5" class="form-control" readonly id="res2"  placeholder="Price for one" required=""></div></td>
+      </tr>
+      <tr>
+        <td>Съёмка</td>
+        <td > <label for="res3" class="form-label">Вес оценки</label>
+          <div class="input-group has-validation">
+            <span class="input-group-text"></span>
+            <input type="number" min="0" step="5" class="form-control" readonly id="res3"  placeholder="Price for one" required=""></div></td>
+      </tr>
+      <tr>
+        <td>Монтаж</td>
+        <td> <label for="res4" class="form-label">Вес оценки</label>
+          <div class="input-group has-validation">
+            <span class="input-group-text"></span>
+            <input type="number" min="0" step="5" class="form-control" readonly id="res4"  placeholder="Price for one" required=""></div></td>
+      </tr>
+      <tr>
+        <td>Оригинальность</td>
+        <td> <label for="res5" class="form-label">Вес оценки</label>
+          <div class="input-group has-validation">
+            <span class="input-group-text"></span>
+            <input type="number" min="0" step="5" class="form-control" readonly id="res5"  placeholder="Price for one" required=""></div></td>
+      </tr>
+      <tr>
+        <td>Самый важный критерий</td>
+        <td> <label for="res" class="form-label">Результат</label>
+          <div class="input-group has-validation">
+            <span class="input-group-text"></span>
+            <input type="text"  class="form-control" readonly id="res"  placeholder="Price for one" required=""></div></td>
+      </tr>
+      </tbody>
+    </table>
+    <script>
+      function abs(k1,k2,k3,k4,k5) {
+        var sum = Number(k1) + Number(k2) + Number(k3) + Number(k4) + Number(k5);//нахождение суммы оценок
+        if(sum==0){alert("Введите значения")}
+        k1 /= sum; //получение весов цели
+        k2 /= sum;
+        k3 /= sum;
+        k4 /= sum;
+        k5 /= sum;
+        document.getElementById('res1').value = k1 ;
+        document.getElementById('res2').value = k2 ;
+        document.getElementById('res3').value = k3 ;
+        document.getElementById('res4').value = k4 ;
+        document.getElementById('res5').value = k5 ;
+        var max=Math.max(k1, k2, k3, k4, k5);
+        switch (max){
+          case k1:{document.getElementById('res').value = "Сюжет"; break; }
+          case k2:{document.getElementById('res').value = "Актёрская игра" ; break;}
+          case k3:{document.getElementById('res').value = "Съёмка" ; break;}
+          case k4:{document.getElementById('res').value = "Монтаж" ; break;}
+          case k5:{document.getElementById('res').value = "Оригинальность" ; break;}
+        }
+      }
+    </script>
+  </div>
+</main>
+<footer th:insert="blocks/footer :: footer"></footer>
+</body>
+</html>
