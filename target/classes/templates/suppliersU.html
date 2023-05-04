@@ -15,13 +15,14 @@
 <main>
 <div class="album py-5 bg-light">
   <br>
+  <div class="container mt-5">
+    <h1>Фильмы</h1>
+  </div> <br>
   <form  action="/supplier" method="get">
     <input type="text" name="title" class="w-50" style="background: #87e38d"/> </input>
     <input type="submit" value="Поиск" class="w-25"/> </input></br>
   </form>
-  <div class="container mt-5">
-    <h1>Фильмы</h1>
-  </div>
+
 
   <div class="container">
     <div class="album py-5 bg-light">
@@ -38,7 +39,6 @@
                     <div class="btn-group">
                       <a th:href="'/supplier/'+${el.getId()}"  class="btn btn-sm btn-outline-success">Просмотр</a>
                       <form th:action="'/supplier/'+${el.getId()}+'/remove'" method="post">
-                        <button class="btn btn-sm btn-outline-success" type="submit">Удалить</button>
                       </form>
                     </div>
                   </div>

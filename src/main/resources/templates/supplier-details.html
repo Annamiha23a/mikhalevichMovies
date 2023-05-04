@@ -29,9 +29,12 @@
             <br>
             <h1 th:utext="${'<strong>Режиссер:</strong> ' + el.getDirector()}"></h1>
             <br>
-            <form th:action="'/supplier/'+${el.getId()}+'/update'" method="get">
-                <button class="btn btn-sm btn-outline-success" type="submit">Редактировать</button>
-            </form>
+            <div th:if="${#authorization.expression('hasAuthority(''ROLE_ADMIN'')')}" class="unauthorized">
+                <form th:action="'/supplier/'+${el.getId()}+'/update'" method="get">
+                    <button class="btn btn-sm btn-outline-success" type="submit">Редактировать</button>
+                </form>
+            </div>
+
         </div>
     </div>
 </div>

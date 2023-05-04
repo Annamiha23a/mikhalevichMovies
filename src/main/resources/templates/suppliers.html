@@ -15,12 +15,15 @@
 
 <div class="album py-5 bg-light">
     <div class="container mt-5">
-        <h1 >Кинофильмы</h1>
+        <div class="container mt-5">
+            <h1>Фильмы</h1>
+        </div></br>
+        <form  action="/supplier" method="get">
+            <input type="text" name="title" class="w-50" style="background: #87e38d"/> </input>
+            <input type="submit" value="Поиск" class="w-25"/> </input></br>
+        </form>
+
     </div>
-    <form style="margin-left: 5%;" action="/supplier" method="get">
-        <input type="text" name="title" class="w-50" style="background: #87e38d"/> </input>
-        <input type="submit" value="Поиск" class="w-25"/> </input></br>
-    </form>
     <div class="container">
         <a href="/add-supplier" class="btn w-75 btn-success" type="submit" >Добавить фильм</a>
           <div class="album py-5 bg-light">
