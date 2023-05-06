@@ -1,8 +1,8 @@
 package com.company.movie.service.impl;
 
 import com.company.movie.entity.Movie;
-import com.company.movie.repository.SupplierRepository;
-import com.company.movie.service.SupplierService;
+import com.company.movie.repository.MovieRepository;
+import com.company.movie.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,43 +11,43 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
-public class SupplierServiceImpl implements SupplierService {
-	private SupplierRepository supplierRepository;
+public class MovieServiceImpl implements MovieService {
+	private MovieRepository movieRepository;
 
 	@Autowired
-	public SupplierServiceImpl(SupplierRepository supplierRepository) {
-		this.supplierRepository = supplierRepository;
+	public MovieServiceImpl(MovieRepository movieRepository) {
+		this.movieRepository = movieRepository;
 	}
 
 	@Override
 	public Movie save(Movie movie) {
-		return supplierRepository.save(movie);
+		return movieRepository.save(movie);
 	}
 
 	@Override
 	public Movie findById(int id) {
-		return supplierRepository.findById(id)
+		return movieRepository.findById(id)
 				.orElseThrow(()->new NoSuchElementException());
 	}
 
 	@Override
 	public List<Movie> findAllSuppliers() {
-		return supplierRepository.findAll();
+		return movieRepository.findAll();
 	}
 
 	@Override
 	public void removeSupplier(int id) {
 		Movie movie = findById(id);
-		supplierRepository.delete(movie);
+		movieRepository.delete(movie);
 	}
 	@Override
 	public List<Movie> listMovies(String title){
-		if (title != null) return supplierRepository.findByTitle(title);
-		return supplierRepository.findAll();
+		if (title != null) return movieRepository.findByTitle(title);
+		return movieRepository.findAll();
 	}
 
 	public void updateS(Integer id, String title, String genre, String country, String director, String description){
-		Optional<Movie> movie = supplierRepository.findById(id);
+		Optional<Movie> movie = movieRepository.findById(id);
 		if (!(movie.get() ==null)){
 			movie.get().setTitle(title);
 			movie.get().setGenre(genre);
@@ -55,6 +55,6 @@ public class SupplierServiceImpl implements SupplierService {
 			movie.get().setDirector(director);
 			movie.get().setDescription(description);
 		}
-		supplierRepository.save(movie.get());
+		movieRepository.save(movie.get());
 	}
 }

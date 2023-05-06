@@ -1,8 +1,8 @@
 package com.company.movie.service.impl;
 
 import com.company.movie.entity.Critics;
-import com.company.movie.repository.CustomerRepository;
-import com.company.movie.service.CustomerService;
+import com.company.movie.repository.CriticsRepository;
+import com.company.movie.service.CriticsService;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
@@ -22,12 +22,12 @@ import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@ContextConfiguration(classes = {CustomerServiceImpl.class})
+@ContextConfiguration(classes = {CriticsServiceImpl.class})
 public class CriticsServiceImplTest {
 	@Autowired
-	private CustomerService customerService;
+	private CriticsService criticsService;
 	@MockBean
-	private CustomerRepository customerRepository;
+	private CriticsRepository criticsRepository;
 	private final int id = 10;
 	private final String name = "alex2411";
 	private final List<Critics> list;
@@ -48,29 +48,29 @@ public class CriticsServiceImplTest {
 	}
 
 	@Test
-	public void findAllCustomers_success() {
-		when(customerRepository.findAll()).thenReturn(list);
-		assertEquals(list, customerService.findAllCustomers());
+	public void findAllCritics_success() {
+		when(criticsRepository.findAll()).thenReturn(list);
+		assertEquals(list, criticsService.findAllCustomers());
 	}
 
 	@Test
-	public void findCustomerById_success() {
-		when(customerRepository.findById(id)).thenReturn(Optional.of(outputCritics));
-		Assertions.assertEquals(outputCritics,customerService.findById(id));
+	public void findCriticsById_success() {
+		when(criticsRepository.findById(id)).thenReturn(Optional.of(outputCritics));
+		Assertions.assertEquals(outputCritics, criticsService.findById(id));
 	}
 
 	@Test
-	public void removeCustomer_success() {
-		when(customerRepository.findById(id)).thenReturn(Optional.of(inputCritics));
-		doNothing().when(customerRepository).delete(inputCritics);
-		customerService.removeCustomer(id);
-		verify(customerRepository).delete(inputCritics);
+	public void removeCritics_success() {
+		when(criticsRepository.findById(id)).thenReturn(Optional.of(inputCritics));
+		doNothing().when(criticsRepository).delete(inputCritics);
+		criticsService.removeCustomer(id);
+		verify(criticsRepository).delete(inputCritics);
 	}
 
 	@Test
-	public void findCustomerById_invalidIndex() {
-		when(customerRepository.findById(id)).thenReturn(null);
-		assertThrows(NullPointerException.class, ()->customerService.findById(id));
+	public void findCriticsById_invalidIndex() {
+		when(criticsRepository.findById(id)).thenReturn(null);
+		assertThrows(NullPointerException.class, ()-> criticsService.findById(id));
 	}
 
 }

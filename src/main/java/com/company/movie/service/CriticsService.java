@@ -4,7 +4,7 @@ import com.company.movie.entity.Critics;
 
 import java.util.List;
 
-public interface CustomerService {
+public interface CriticsService {
 	Critics save(Critics critics);
 	Critics findById(int id);
 	List<Critics> findAllCustomers();

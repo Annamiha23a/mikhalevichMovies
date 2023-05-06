@@ -1,8 +1,8 @@
 package com.company.movie.controller;
 
 import com.company.movie.entity.Critics;
-import com.company.movie.service.CustomerService;
-import com.company.movie.service.impl.CustomerServiceImpl;
+import com.company.movie.service.CriticsService;
+import com.company.movie.service.impl.CriticsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,13 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class CustomerController {
-	private final CustomerService customerService;
-	private final CustomerServiceImpl criticService;
+public class CriticsController {
+	private final CriticsService criticsService;
+	private final CriticsServiceImpl criticService;
 
 	@Autowired
-	public CustomerController(CustomerService customerService, CustomerServiceImpl criticService) {
-		this.customerService = customerService;
+	public CriticsController(CriticsService criticsService, CriticsServiceImpl criticService) {
+		this.criticsService = criticsService;
 		this.criticService = criticService;
 	}
 
@@ -30,20 +30,20 @@ public class CustomerController {
 
 	@PostMapping("/add-customer")
 	public String addCustomer(@ModelAttribute Critics critics) {
-		customerService.save(critics);
+		criticsService.save(critics);
 		return "redirect:customers";
 	}
 
 	@GetMapping("/customers")
 	public String findAllCustomers(Model model) {
-		List<Critics> critics = customerService.findAllCustomers();
+		List<Critics> critics = criticsService.findAllCustomers();
 		model.addAttribute("customers", critics);
 		return "customers";
 	}
 
 	@GetMapping("/customer/{id}")
 	public String findCustomer(@PathVariable(value = "id") int id, Model model) {
-		Critics critic = customerService.findById(id);
+		Critics critic = criticsService.findById(id);
 		List<Critics> critics = new ArrayList<>();
 		critics.add(critic);
 		model.addAttribute("customer", critics);
@@ -52,13 +52,13 @@ public class CustomerController {
 
 	@PostMapping("/customer/{id}/remove")
 	public String removeCustomer(@PathVariable(value = "id") int id, Model model) {
-		customerService.removeCustomer(id);
+		criticsService.removeCustomer(id);
 		return "customers";
 	}
 
 	@GetMapping("/customer/{id}/update")
 	public String updateCustomer(@PathVariable(value="id")int id, Model model){
-		Critics critic = customerService.findById(id);
+		Critics critic = criticsService.findById(id);
 		List<Critics> critics = new ArrayList<>();
 		critics.add(critic);
 		model.addAttribute("customer", critics);

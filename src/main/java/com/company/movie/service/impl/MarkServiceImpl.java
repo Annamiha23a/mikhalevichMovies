@@ -2,7 +2,7 @@ package com.company.movie.service.impl;
 
 import com.company.movie.dto.ProductDTO;
 import com.company.movie.entity.Mark;
-import com.company.movie.repository.ProductRepository;
+import com.company.movie.repository.MarkRepository;
 import com.company.movie.service.ProductService;
 import com.company.movie.service.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,31 +13,31 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
-public class ProductServiceImpl implements ProductService {
-	private ProductRepository productRepository;
+public class MarkServiceImpl implements ProductService {
+	private MarkRepository markRepository;
 	private ProductMapper productMapper;
 
 	@Autowired
-	public ProductServiceImpl(ProductRepository productRepository, ProductMapper productMapper) {
-		this.productRepository = productRepository;
+	public MarkServiceImpl(MarkRepository markRepository, ProductMapper productMapper) {
+		this.markRepository = markRepository;
 		this.productMapper = productMapper;
 	}
 
 	@Override
 	public Mark save(ProductDTO productDTO) {
 		Mark mark = productMapper.toEntitySup(productDTO);
-		return productRepository.save(mark);
+		return markRepository.save(mark);
 	}
 
 	@Override
 	public Mark findById(int id) {
-		return productRepository.findById(id)
+		return markRepository.findById(id)
 				.orElseThrow(() -> new NoSuchElementException());
 	}
 
 	@Override
 	public List<Mark> findAllProducts() {
-		return productRepository.findAll();
+		return markRepository.findAll();
 	}
 
 	@Override
@@ -46,11 +46,11 @@ public class ProductServiceImpl implements ProductService {
 		System.out.println(mark.getRating());
 		System.out.println(quantity);
 		if (mark.getRating() == quantity) {
-			productRepository.delete(mark);
+			markRepository.delete(mark);
 		}
 		if (mark.getRating() > quantity) {
 			mark.setRating(mark.getRating() - quantity);
-			productRepository.saveAndFlush(mark);
+			markRepository.saveAndFlush(mark);
 		} else {
 			throw new NoSuchElementException();
 		}
@@ -59,17 +59,17 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void removeProduct(int productId) {
 		Mark mark = findById(productId);
-		productRepository.delete(mark);
+		markRepository.delete(mark);
 	}
 
 	public void update(Integer id, String script, Integer rating, Integer duration, String comment){
-		Optional<Mark> mark = productRepository.findById(id);
+		Optional<Mark> mark = markRepository.findById(id);
 		if (!(mark.get()==null)){
 			mark.get().setScript(script);
 			mark.get().setRating(rating);
 			mark.get().setDuration(duration);
 			mark.get().setComment(comment);
 		}
-		productRepository.save(mark.get());
+		markRepository.save(mark.get());
 	}
 }

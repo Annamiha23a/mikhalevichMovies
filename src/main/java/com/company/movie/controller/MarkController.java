@@ -5,10 +5,10 @@ import com.company.movie.entity.Critics;
 import com.company.movie.entity.Mark;
 import com.company.movie.entity.Movie;
 import com.company.movie.service.ProductService;
-import com.company.movie.service.SupplierService;
-import com.company.movie.service.impl.ProductServiceImpl;
+import com.company.movie.service.MovieService;
+import com.company.movie.service.impl.MarkServiceImpl;
 import com.company.movie.service.mapper.ProductMapper;
-import com.company.movie.service.CustomerService;
+import com.company.movie.service.CriticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,29 +18,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class ProductController {
+public class MarkController {
 	private final ProductService productService;
-	private final SupplierService supplierService;
-	private final CustomerService customerService;
+	private final MovieService movieService;
+	private final CriticsService criticsService;
 	private final ProductMapper productMapper;
-	private final ProductServiceImpl markService;
+	private final MarkServiceImpl markService;
 
 	@Autowired
-	public ProductController(ProductService productService, SupplierService supplierService,
-							 CustomerService customerService, ProductMapper productMapper,
-							 ProductServiceImpl markService) {
+	public MarkController(ProductService productService, MovieService movieService,
+						  CriticsService criticsService, ProductMapper productMapper,
+						  MarkServiceImpl markService) {
 		this.productService = productService;
-		this.supplierService = supplierService;
-		this.customerService = customerService;
+		this.movieService = movieService;
+		this.criticsService = criticsService;
 		this.productMapper = productMapper;
 		this.markService = markService;
 	}
 
 	@GetMapping("/add-product")
 	public String addProduct(Model model) {
-		List<Movie> movies = supplierService.findAllSuppliers();
+		List<Movie> movies = movieService.findAllSuppliers();
 		model.addAttribute("suppliers", movies);
-		List<Critics> critics = customerService.findAllCustomers();
+		List<Critics> critics = criticsService.findAllCustomers();
 		model.addAttribute("critics", critics);
 		model.addAttribute(new ProductDTO());
 		return "add-product";
@@ -54,7 +54,7 @@ public class ProductController {
 
 	@GetMapping("/sell-product")
 	public String sellProduct(Model model) {
-		List<Critics> critics = customerService.findAllCustomers();
+		List<Critics> critics = criticsService.findAllCustomers();
 		model.addAttribute("customers", critics);
 		List<Mark> marks = productService.findAllProducts();
 		model.addAttribute("products", marks);
@@ -101,9 +101,9 @@ public class ProductController {
 		List<Mark> marks = new ArrayList<>();
 		marks.add(mark);
 		model.addAttribute("product", marks);
-		List<Movie> movies = supplierService.findAllSuppliers();
+		List<Movie> movies = movieService.findAllSuppliers();
 		model.addAttribute("suppliers", movies);
-		List<Critics> critics = customerService.findAllCustomers();
+		List<Critics> critics = criticsService.findAllCustomers();
 		model.addAttribute("critics", critics);
 		model.addAttribute(new ProductDTO());
 		return "updateProductU";

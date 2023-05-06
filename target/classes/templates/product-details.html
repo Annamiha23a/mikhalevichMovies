@@ -15,10 +15,10 @@
 
 <div class="album py-5 bg-light">
   <div class="container mt-5">
-    <h1>Рецензии</h1>
+    <h1>Рецензия</h1>
   </div>
   <div class="container">
-    <div th:each="el : ${product}" class="alert alert-info mt-2">
+    <div th:each="el : ${product}" class="alert alert-success mt-2">
       <h1 th:utext="${'<strong>Название:</strong> ' + el.getScript()}"></h1>
       <br>
       <h1 th:utext="${'<strong>Рейтинг:</strong> ' + el.getRating()}"></h1>

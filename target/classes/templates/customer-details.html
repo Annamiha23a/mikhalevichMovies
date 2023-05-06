@@ -18,7 +18,7 @@
         <h1>Критик</h1>
     </div>
     <div class="container">
-        <div th:each="el : ${customer}" class="alert alert-info mt-2">
+        <div th:each="el : ${customer}" class="alert alert-success mt-2">
             <h1 th:utext="${'<strong>Специальность:</strong> ' + el.getSpecialty()}"></h1>
             <br>
             <h1 th:utext="${'<strong>Имя:</strong> ' + el.getName()}"></h1>

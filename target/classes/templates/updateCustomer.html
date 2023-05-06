@@ -15,10 +15,10 @@
 
 <div class="album py-5 bg-light">
     <div class="container mt-5">
-        <h1>Фильм</h1>
+        <h1>Редактирование критика</h1>
     </div>
     <div class="container">
-        <div th:each="el : ${customer}" class="alert alert-info mt-2">
+        <div th:each="el : ${customer}" class="alert alert-success mt-2">
             <form th:action="'/customer/'+${el.getId()}+'/updateC'" method="post">
             <label>Специальность</label><br>
             <input type="text" class="form-control" th:value="${el.getSpecialty()}" name="specialty"></input>

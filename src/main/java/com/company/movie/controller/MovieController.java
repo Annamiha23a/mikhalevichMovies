@@ -1,8 +1,8 @@
 package com.company.movie.controller;
 
 import com.company.movie.entity.Movie;
-import com.company.movie.service.SupplierService;
-import com.company.movie.service.impl.SupplierServiceImpl;
+import com.company.movie.service.MovieService;
+import com.company.movie.service.impl.MovieServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,14 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class SupplierController {
-	private SupplierService supplierService;
-	private final SupplierServiceImpl movieService;
+public class MovieController {
+	private MovieService movieService;
+	private final MovieServiceImpl movieServiceImpl;
 
 	@Autowired
-	public SupplierController(SupplierService supplierService, SupplierServiceImpl movieService) {
-		this.supplierService = supplierService;
-		this.movieService=movieService;
+	public MovieController(MovieService supplierService, MovieServiceImpl movieService) {
+		this.movieService = supplierService;
+		this.movieServiceImpl=movieService;
 	}
 
 	@GetMapping("/add-supplier")
@@ -30,30 +30,30 @@ public class SupplierController {
 
 	@PostMapping("/add-supplier")
 	public String addSupplier(@ModelAttribute Movie movie) {
-		supplierService.save(movie);
+		movieService.save(movie);
 		return "redirect:suppliers";
 	}
 	@GetMapping(value = "/supplier")
 	public String product(@RequestParam(name = "title", required = false) String title, Model model){
-		model.addAttribute("suppliers", supplierService.listMovies(title));
+		model.addAttribute("suppliers", movieService.listMovies(title));
 		return "suppliers";
 	}
 
 	@GetMapping("/suppliersU")
 	public String findAllSupplier(Model model) {
-		List<Movie> movies = supplierService.findAllSuppliers();
+		List<Movie> movies = movieService.findAllSuppliers();
 		model.addAttribute("suppliers", movies);
 		return "suppliersU";
 	}
 	@GetMapping("/suppliers")
 	public String findAllSuppliers(Model model) {
-		List<Movie> movies = supplierService.findAllSuppliers();
+		List<Movie> movies = movieService.findAllSuppliers();
 		model.addAttribute("suppliers", movies);
 		return "suppliers";
 	}
 	@GetMapping("/mark")
 	public String markAllSuppliers(Model model) {
-		List<Movie> suppliers = supplierService.findAllSuppliers();
+		List<Movie> suppliers = movieService.findAllSuppliers();
 		model.addAttribute("movies",suppliers);
 		return "mark";
 	}
@@ -65,7 +65,7 @@ public class SupplierController {
 	}
 	@GetMapping("/supplier/{id}")
 	public String findSupplier(@PathVariable(value = "id") int id, Model model) {
-		Movie movie = supplierService.findById(id);
+		Movie movie = movieService.findById(id);
 		List<Movie> movies = new ArrayList<>();
 		movies.add(movie);
 		model.addAttribute("supplier", movies);
@@ -74,13 +74,13 @@ public class SupplierController {
 
 	@PostMapping("/supplier/{id}/remove")
 	public String removeSupplier(@PathVariable(value = "id") int id, Model model) {
-		supplierService.removeSupplier(id);
+		movieService.removeSupplier(id);
 		return "suppliers";
 	}
 
 	@GetMapping("/supplier/{id}/update")
 	public String updateSupplier(@PathVariable(value = "id") int id, Model model){
-		Movie movie = supplierService.findById(id);
+		Movie movie = movieService.findById(id);
 		List<Movie> movies = new ArrayList<>();
 		movies.add(movie);
 		model.addAttribute("supplier",movies);
@@ -92,7 +92,7 @@ public class SupplierController {
 						  @RequestParam(value="genre")String genre, @RequestParam(value="country")String country,
 						  @RequestParam(value="director")String director, @RequestParam(value="description")String description,
 						  Model model){
-		movieService.updateS(id,title,genre,country,director,description);
+		movieServiceImpl.updateS(id,title,genre,country,director,description);
 		return "redirect:/suppliers";
 	}
 

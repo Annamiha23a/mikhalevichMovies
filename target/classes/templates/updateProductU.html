@@ -15,10 +15,10 @@
 
 <div class="album py-5 bg-light">
     <div class="container mt-5">
-        <h1>Фильм</h1>
+        <h1>Редактирование рецензии</h1>
     </div>
     <div class="container">
-        <div th:each="el : ${product}" class="alert alert-info mt-2">
+        <div th:each="el : ${product}" class="alert alert-success mt-2">
             <form th:action="'/product/'+${el.getId()}+'/updateP'" method="post">
                 <label>Название</label><br>
                 <input type="text" class="form-control" th:value="${el.getScript()}" name="script"></input>

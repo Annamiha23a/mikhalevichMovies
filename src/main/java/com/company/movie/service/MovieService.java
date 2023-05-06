@@ -4,7 +4,7 @@ import com.company.movie.entity.Movie;
 
 import java.util.List;
 
-public interface SupplierService {
+public interface MovieService {
 	Movie save(Movie movie);
 	Movie findById(int id);
 	List<Movie> findAllSuppliers();

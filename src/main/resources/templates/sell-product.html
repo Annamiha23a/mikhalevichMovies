@@ -19,7 +19,7 @@
       <h1>Рецензии</h1>
     </div>
     <div class="container">
-      <div th:each="el:${products}" class="alert alert-info mt-2">
+      <div th:each="el:${products}" class="alert alert-success mt-2">
         <h3 th:text="${el.getScript()}"/>
         <a th:href="'/product/'+${el.getId()}+'/update'" class="btn btn-success">Редактировать</a>
 
